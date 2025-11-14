@@ -119,7 +119,11 @@ public class LegacyProvider implements UserStorageProvider,
 
     @Override
     public boolean updateCredential(RealmModel realm, UserModel user, CredentialInput input) {
-        severFederationLink(user);
+        var disableSeverFederationConfig = model.getConfig().getFirst(ConfigurationProperties.DISABLE_SEVER_FEDERATION_LINK);
+        boolean severFederation = !Boolean.parseBoolean(disableSeverFederationConfig);
+        if (severFederation) {
+            severFederationLink(user);
+        }
         return false;
     }
 
