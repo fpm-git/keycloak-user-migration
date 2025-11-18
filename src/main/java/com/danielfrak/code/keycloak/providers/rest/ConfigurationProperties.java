@@ -16,6 +16,7 @@ public final class ConfigurationProperties {
     public static final String API_HTTP_BASIC_USERNAME_PROPERTY = "API_HTTP_BASIC_USERNAME";
     public static final String API_HTTP_BASIC_PASSWORD_PROPERTY = "API_HTTP_BASIC_PASSWORD";
     public static final String USE_USER_ID_FOR_CREDENTIAL_VERIFICATION = "USE_USER_ID_FOR_CREDENTIAL_VERIFICATION";
+    public static final String DISABLE_SEVER_FEDERATION_LINK = "DISABLE_SEVER_FEDERATION_LINK";
     public static final String ROLE_MAP_PROPERTY = "ROLE_MAP";
     public static final String GROUP_MAP_PROPERTY = "GROUP_MAP";
     public static final String MIGRATE_UNMAPPED_ROLES_PROPERTY = "MIGRATE_UNMAPPED_ROLES";
@@ -50,6 +51,11 @@ public final class ConfigurationProperties {
                     "Use user id for credential verification",
                     "Use the id of the user instead of the username as the path" +
                     "parameter when making a credential verification request",
+                    BOOLEAN_TYPE, false),
+            new ProviderConfigProperty(DISABLE_SEVER_FEDERATION_LINK,
+                    "Disable federation link sever",
+                    "When a login is successfull, do not sever the federation link, " +
+                    "allowing the next login to be validated against the legacy system.",
                     BOOLEAN_TYPE, false),
             new ProviderConfigProperty(ROLE_MAP_PROPERTY,
                     "Legacy role conversion",
