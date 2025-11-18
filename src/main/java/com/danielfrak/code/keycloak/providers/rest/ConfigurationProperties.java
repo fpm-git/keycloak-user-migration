@@ -16,7 +16,7 @@ public final class ConfigurationProperties {
     public static final String API_HTTP_BASIC_USERNAME_PROPERTY = "API_HTTP_BASIC_USERNAME";
     public static final String API_HTTP_BASIC_PASSWORD_PROPERTY = "API_HTTP_BASIC_PASSWORD";
     public static final String USE_USER_ID_FOR_CREDENTIAL_VERIFICATION = "USE_USER_ID_FOR_CREDENTIAL_VERIFICATION";
-    public static final String USE_USER_ID_FOR_CREDENTIAL_VERIFICATION = "DISABLE_SEVER_FEDERATION_LINK";
+    public static final String DISABLE_SEVER_FEDERATION_LINK = "DISABLE_SEVER_FEDERATION_LINK";
     public static final String ROLE_MAP_PROPERTY = "ROLE_MAP";
     public static final String GROUP_MAP_PROPERTY = "GROUP_MAP";
     public static final String MIGRATE_UNMAPPED_ROLES_PROPERTY = "MIGRATE_UNMAPPED_ROLES";
