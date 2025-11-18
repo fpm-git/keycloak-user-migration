@@ -323,7 +323,7 @@ class LegacyProviderTest {
     @Test
     void shouldNotRemoveFederationLinkWhenCredentialUpdatesWithConfig() {
         var input = mock(CredentialInput.class);
-        when(userModel.getFederationLink())
+        lenient().when(userModel.getFederationLink())
                 .thenReturn("someId");
 
         MultivaluedHashMap<String, String> config = new MultivaluedHashMap<>();
