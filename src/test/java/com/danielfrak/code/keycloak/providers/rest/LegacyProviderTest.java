@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.danielfrak.code.keycloak.providers.rest.ConfigurationProperties.USE_USER_ID_FOR_CREDENTIAL_VERIFICATION;
+import static com.danielfrak.code.keycloak.providers.rest.ConfigurationProperties.DISABLE_SEVER_FEDERATION_LINK;
 import static com.danielfrak.code.keycloak.providers.rest.remote.TestLegacyUser.aMinimalLegacyUser;
 import static java.util.Collections.emptySet;
 import static org.junit.jupiter.api.Assertions.*;
@@ -309,6 +310,10 @@ class LegacyProviderTest {
         when(userModel.getFederationLink())
                 .thenReturn("someId");
 
+        MultivaluedHashMap<String, String> config = new MultivaluedHashMap<>();
+        config.put(DISABLE_SEVER_FEDERATION_LINK, List.of("true"));
+        when(model.getConfig()).thenReturn(config);
+        
         assertFalse(legacyProvider.updateCredential(realmModel, userModel, input));
 
         verify(userModel)
@@ -321,6 +326,10 @@ class LegacyProviderTest {
         when(userModel.getFederationLink())
                 .thenReturn(" ");
 
+        MultivaluedHashMap<String, String> config = new MultivaluedHashMap<>();
+        config.put(DISABLE_SEVER_FEDERATION_LINK, List.of("true"));
+        when(model.getConfig()).thenReturn(config);
+        
         assertFalse(legacyProvider.updateCredential(realmModel, userModel, input));
 
         verify(userModel, never())
@@ -333,6 +342,10 @@ class LegacyProviderTest {
         when(userModel.getFederationLink())
                 .thenReturn(null);
 
+        MultivaluedHashMap<String, String> config = new MultivaluedHashMap<>();
+        config.put(DISABLE_SEVER_FEDERATION_LINK, List.of("true"));
+        when(model.getConfig()).thenReturn(config);
+        
         assertFalse(legacyProvider.updateCredential(realmModel, userModel, input));
 
         verify(userModel, never())
