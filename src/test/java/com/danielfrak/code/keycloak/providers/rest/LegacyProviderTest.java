@@ -311,7 +311,7 @@ class LegacyProviderTest {
                 .thenReturn("someId");
 
         MultivaluedHashMap<String, String> config = new MultivaluedHashMap<>();
-        config.put(DISABLE_SEVER_FEDERATION_LINK, List.of("true"));
+        config.put(DISABLE_SEVER_FEDERATION_LINK, List.of("false"));
         when(model.getConfig()).thenReturn(config);
         
         assertFalse(legacyProvider.updateCredential(realmModel, userModel, input));
@@ -321,13 +321,29 @@ class LegacyProviderTest {
     }
 
     @Test
+    void shouldNotRemoveFederationLinkWhenCredentialUpdatesWithConfig() {
+        var input = mock(CredentialInput.class);
+        when(userModel.getFederationLink())
+                .thenReturn("someId");
+
+        MultivaluedHashMap<String, String> config = new MultivaluedHashMap<>();
+        config.put(DISABLE_SEVER_FEDERATION_LINK, List.of("true"));
+        when(model.getConfig()).thenReturn(config);
+        
+        assertFalse(legacyProvider.updateCredential(realmModel, userModel, input));
+
+        verify(userModel, never())
+                .setFederationLink(null);
+    }
+    
+    @Test
     void shouldNotRemoveFederationLinkWhenBlankAndCredentialUpdates() {
         var input = mock(CredentialInput.class);
         when(userModel.getFederationLink())
                 .thenReturn(" ");
 
         MultivaluedHashMap<String, String> config = new MultivaluedHashMap<>();
-        config.put(DISABLE_SEVER_FEDERATION_LINK, List.of("true"));
+        config.put(DISABLE_SEVER_FEDERATION_LINK, List.of("false"));
         when(model.getConfig()).thenReturn(config);
         
         assertFalse(legacyProvider.updateCredential(realmModel, userModel, input));
@@ -343,7 +359,7 @@ class LegacyProviderTest {
                 .thenReturn(null);
 
         MultivaluedHashMap<String, String> config = new MultivaluedHashMap<>();
-        config.put(DISABLE_SEVER_FEDERATION_LINK, List.of("true"));
+        config.put(DISABLE_SEVER_FEDERATION_LINK, List.of("false"));
         when(model.getConfig()).thenReturn(config);
         
         assertFalse(legacyProvider.updateCredential(realmModel, userModel, input));
